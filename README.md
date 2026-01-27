@@ -1,5 +1,6 @@
 # DBS25F001
-Course Name: CMPE-341 
+Course Code: CMPE-341 
+Course Name: DataBase Management 
 Project Name: "Hospital Management System"
 # Group Members 
 Hafsa 
