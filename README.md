@@ -19,6 +19,17 @@ CREATE TABLE Patient (
     Address VARCHAR(255)
     );
 <img width="512" height="292" alt="image" src="https://github.com/user-attachments/assets/b61fb102-4180-4bd1-805f-088113d47b38" />
+# Doctor 
+CREATE TABLE Doctor (
+    DoctorID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    CNIC VARCHAR(15) NOT NULL UNIQUE,
+    Gender ENUM('Male','Female') NOT NULL,
+    Phone VARCHAR(15),
+    Specialty VARCHAR(50),
+    DOB DATE NOT NULL
+);
+<img width="516" height="297" alt="image" src="https://github.com/user-attachments/assets/2ced56b0-f4f0-4a6f-a20d-ebccc272a289" />
 # Patient Appointment 
 CREATE TABLE Appointment (
     AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
