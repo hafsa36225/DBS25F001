@@ -1,5 +1,6 @@
 # DBS25F001
-CMPE-341 Term Project – Hospital Management System
+Course Name: CMPE-341 
+Project Name: "Hospital Management System"
 # Group Members 
 Hafsa 
 Aiman 
