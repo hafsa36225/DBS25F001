@@ -16,6 +16,66 @@ Billing & Payments
 Medical Records  
 User Authentication  
 Reports Generation 
+# DOMAIN CLASSES (10)
+   # Patient
+PatientID
+Name
+CNIC
+Gender
+Date of birth (DOB)
+Phone
+Address
+   # Doctor
+DoctorID
+Name
+CNIC
+Gender
+Specialty
+Phone
+DOB
+   # Appointment
+AppointmentID
+PatientID
+DoctorID
+Date
+Time
+Status
+   # Department
+DepartmentID
+DepartmentName
+Description
+   # User
+UserID
+Username
+Password
+Role (Admin / Doctor / Receptionist)
+   # MedicalRecord
+RecordID
+PatientID
+DoctorID
+Diagnosis
+Prescription
+RecordDate
+   # Billing
+BillID
+PatientID
+TotalAmount
+BillDate
+   # Payment
+PaymentID
+BillID
+PaymentMethod
+PaymentStatus
+PaymentDate
+   # Prescription
+PrescriptionID
+RecordID
+MedicineName
+MedicinePeriod 
+   # Report
+ReportID
+ReportType
+GeneratedDate
 # Start 
 # Patient
 CREATE TABLE Patient (
