@@ -1,3 +1,4 @@
+
 # DBS25F001
 Course Code: CMPE-341 
 Course Name: DataBase Management 
@@ -205,6 +206,34 @@ CREATE TABLE Room (
     RoomType VARCHAR(50
 );
 <img width="473" height="144" alt="image" src="https://github.com/user-attachments/assets/8f120726-0944-49e5-b4b1-bcb0e8aba42c" />
+# Patient Admit 
+CREATE TABLE Admit (
+    AdmitID INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT,
+    RoomID INT,
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
+    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+);
+<img width="689" height="234" alt="image" src="https://github.com/user-attachments/assets/f8374744-31a0-47c8-8e75-36b1010d90d1" />
+# FeedBack \ Complain 
+CREATE TABLE Feedback (
+    FeedbackID INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT,
+    Comments VARCHAR(200),
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)
+);
+<img width="619" height="211" alt="image" src="https://github.com/user-attachments/assets/46c55277-264e-46dc-b2a6-f83893f0144b" />
+# System Login
+CREATE TABLE LoginLog (
+    LogID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT,
+    LoginTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (UserID) REFERENCES User(UserID)
+);
+<img width="567" height="195" alt="image" src="https://github.com/user-attachments/assets/41a33b2a-968f-4e9a-8b62-5de263a4fe59" />
+
+
+
 
 
 
