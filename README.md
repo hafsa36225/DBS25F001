@@ -117,6 +117,15 @@ CREATE TABLE Doctor (
     DOB DATE NOT NULL
 );
 <img width="516" height="297" alt="image" src="https://github.com/user-attachments/assets/2ced56b0-f4f0-4a6f-a20d-ebccc272a289" />
+# Doctor Department
+CREATE TABLE DoctorDepartment (
+    DoctorDeptID INT AUTO_INCREMENT PRIMARY KEY,
+    DoctorID INT NOT NULL,
+    DepartmentID INT NOT NULL,
+    FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID),
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+<img width="755" height="227" alt="image" src="https://github.com/user-attachments/assets/316c3c2d-e3fb-456f-82ad-ebca37accfae" />
 # Patient Appointment 
 CREATE TABLE Appointment (
     AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
@@ -145,6 +154,27 @@ CREATE TABLE User (
     Role ENUM('Admin','Doctor','Receptionist') NOT NULL
 );
 <img width="652" height="197" alt="image" src="https://github.com/user-attachments/assets/b30f1d46-6dac-4c2e-917a-8329baa01333" />
+# Medical Records 
+CREATE TABLE MedicalRecord (
+    RecordID INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT NOT NULL,
+    DoctorID INT NOT NULL,
+    Diagnosis TEXT,
+    RecordDate DATE,
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
+);
+<img width="626" height="279" alt="image" src="https://github.com/user-attachments/assets/e2df9945-2811-41ce-b15d-ac75d18b5294" />
+# Precription
+CREATE TABLE Prescription (
+    PrescriptionID INT AUTO_INCREMENT PRIMARY KEY,
+    RecordID INT NOT NULL,
+    MedicineName VARCHAR(100),
+    Dosage VARCHAR(50),
+    FOREIGN KEY (RecordID) REFERENCES MedicalRecord(RecordID)
+);
+<img width="677" height="226" alt="image" src="https://github.com/user-attachments/assets/4f37f8f1-c63f-4f29-ad0a-e089a1552e6d" />
+
 
 
 
