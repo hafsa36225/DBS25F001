@@ -174,6 +174,34 @@ CREATE TABLE Prescription (
     FOREIGN KEY (RecordID) REFERENCES MedicalRecord(RecordID)
 );
 <img width="677" height="226" alt="image" src="https://github.com/user-attachments/assets/4f37f8f1-c63f-4f29-ad0a-e089a1552e6d" />
+# Billing
+CREATE TABLE Billing (
+    BillID INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT NOT NULL,
+    TotalAmount DECIMAL(10,2),
+    BillDate DATE,
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)
+);
+<img width="677" height="218" alt="image" src="https://github.com/user-attachments/assets/2385fd88-ea8d-4311-a077-4793b99f6488" />
+# Payment 
+CREATE TABLE Payment (
+    PaymentID INT AUTO_INCREMENT PRIMARY KEY,
+    BillID INT NOT NULL,
+    PaymentMethod ENUM('Cash','Card','Online'),
+    PaymentStatus ENUM('Paid','Pending'),
+    PaymentDate DATE,
+    FOREIGN KEY (BillID) REFERENCES Billing(BillID)
+);
+<img width="601" height="255" alt="image" src="https://github.com/user-attachments/assets/6ff8e4c8-b0b7-44d8-9fdf-d0779b21ed23" />
+# Report 
+CREATE TABLE Report (
+    ReportID INT AUTO_INCREMENT PRIMARY KEY,
+    ReportName VARCHAR(50)
+);
+<img width="492" height="133" alt="image" src="https://github.com/user-attachments/assets/0b7424d9-5df8-43c3-b094-0a5b2e8ac39d" />
+
+
+
 
 
 
