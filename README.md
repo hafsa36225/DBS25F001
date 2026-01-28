@@ -39,7 +39,6 @@ CREATE TABLE Appointment (
     AppointmentTime TIME,
     Status ENUM('Scheduled','Completed','Cancelled') DEFAULT 'Scheduled',
     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
-    FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
 );
 <img width="812" height="320" alt="image" src="https://github.com/user-attachments/assets/67e7f1e2-c463-44be-8be4-76dc9e9f8f49" />
 
