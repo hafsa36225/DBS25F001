@@ -18,62 +18,95 @@ User Authentication
 Reports Generation 
 # DOMAIN CLASSES (10)
    # Patient
-PatientID
+PatientID(PK)
 Name
 CNIC
 Gender
 Date of birth (DOB)
+# PatientContact 
+ContactID(PK)
+PatientID(FK)
 Phone
 Address
-   # Doctor
-DoctorID
+# Department
+DepartmentID (PK)
+DepartmentName
+Description
+# Speciality
+specialityID (PK)
+Specility Name
+# Doctor
+DoctorID(PK)
 Name
 CNIC
 Gender
-Specialty
 Phone
 DOB
-   # Appointment
-AppointmentID
-PatientID
-DoctorID
-Date
-Time
-Status
-   # Department
-DepartmentID
-DepartmentName
-Description
-   # User
-UserID
-Username
-Password
-Role (Admin / Doctor / Receptionist)
-   # MedicalRecord
-RecordID
-PatientID
-DoctorID
+SpecialtyID (FK)
+DepartmentID (FK)
+# Appointment
+AppointmentID(PK)
+PatientID(FK)
+DoctorID(FK)
+AppointmentDate
+AppointmentTime
+AppointmentStatus
+# MedicalRecord
+RecordID(PK)
+PatientID(FK)
+DoctorID(FK)
 Diagnosis
 Prescription
 RecordDate
-   # Billing
-BillID
-PatientID
-TotalAmount
-BillDate
-   # Payment
-PaymentID
-BillID
-PaymentMethod
-PaymentStatus
-PaymentDate
-   # Prescription
+# Medicine 
+Medicine ID(PK)
+MedicineName
+# Prescription
 PrescriptionID
 RecordID
 MedicineName
 MedicinePeriod 
+# PrescriptionItem
+PrescriptionID (FK)
+MedicineID (FK)
+Dosage: Dosage information
+Composite PK(PrescriptionID,MedicineID)
+# Room 
+RoomID (PK)
+RoomType: Type of room (General, Semi-Private, Private)
+DailyCharges
+# Admission 
+AdmissionID (PK)
+PatientID (FK)
+RoomID (FK)
+AdmitDate
+DischargeDate
+# Billing
+BillID(PK)
+PatientID(FK)
+BillDate
+# Bill Item
+BillItemID (PK)
+BillID (FK)
+Description
+Amount
+# Payment
+PaymentID(PK)
+BillID(FK)
+Amount
+PaymentMethod
+PaymentStatus
+PaymentDate
+# ROLE 
+RoleID(PK)
+RoleName
+# User
+UserID
+Username
+Password
+RoleID(FK)
    # Report
-ReportID
+ReportID(PK)
 ReportType
 GeneratedDate
 # SOFTWARE CLASSES (5)  
@@ -101,11 +134,18 @@ CREATE TABLE Patient (
     Name VARCHAR(50) NOT NULL,
     CNIC VARCHAR(15) NOT NULL UNIQUE,
     Gender ENUM('Male','Female') NOT NULL,
-    DOB DATE NOT NULL,
-    Phone VARCHAR(15),
-    Address VARCHAR(255)
-    );
+    DOB DATE NOT NULL
+);
 <img width="512" height="292" alt="image" src="https://github.com/user-attachments/assets/b61fb102-4180-4bd1-805f-088113d47b38" />
+# PatientContact
+CREATE TABLE PatientContact (
+    ContactID INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT NOT NULL,
+    Phone VARCHAR(15),
+    Address VARCHAR(255),
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)
+);
+
 # Doctor 
 CREATE TABLE Doctor (
     DoctorID INT AUTO_INCREMENT PRIMARY KEY,
