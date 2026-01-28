@@ -76,6 +76,24 @@ MedicinePeriod
 ReportID
 ReportType
 GeneratedDate
+# SOFTWARE CLASSES (5)  
+(Logic Handling)
+   # PatientService
+AddPatient()
+UpdatePatient()
+DeletePatient()
+GetPatient()
+   # DoctorService
+Manage doctor records
+   # AppointmentService
+ScheduleAppointment()
+CancelAppointment()
+   # BillingService
+GenerateBill()
+CalculateTotal()
+   # ReportService
+GeneratePDFReport()
+FilterReports()
 # Start 
 # Patient
 CREATE TABLE Patient (
