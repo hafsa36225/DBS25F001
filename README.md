@@ -1,4 +1,3 @@
-
 # DBS25F001
 Course Code: CMPE-341 
 Course Name: DataBase Management 
