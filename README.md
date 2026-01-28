@@ -202,7 +202,7 @@ CREATE TABLE Report (
 # Rooms
 CREATE TABLE Room (
     RoomID INT AUTO_INCREMENT PRIMARY KEY,
-    RoomType VARCHAR(50)
+    RoomType VARCHAR(50
 );
 <img width="473" height="144" alt="image" src="https://github.com/user-attachments/assets/8f120726-0944-49e5-b4b1-bcb0e8aba42c" />
 
