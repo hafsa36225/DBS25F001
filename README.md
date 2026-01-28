@@ -130,6 +130,25 @@ CREATE TABLE Appointment (
 
 );
 <img width="812" height="320" alt="image" src="https://github.com/user-attachments/assets/67e7f1e2-c463-44be-8be4-76dc9e9f8f49" />
+# Department 
+CREATE TABLE Department (
+    DepartmentID INT AUTO_INCREMENT PRIMARY KEY,
+    DepartmentName VARCHAR(50) NOT NULL UNIQUE,
+    Description VARCHAR(100)
+);
+<img width="563" height="184" alt="image" src="https://github.com/user-attachments/assets/648669f5-a5ec-4d26-8a37-dcd338355448" />
+# User
+CREATE TABLE User (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) UNIQUE NOT NULL,
+    Password VARCHAR(100) NOT NULL,
+    Role ENUM('Admin','Doctor','Receptionist') NOT NULL
+);
+<img width="652" height="197" alt="image" src="https://github.com/user-attachments/assets/b30f1d46-6dac-4c2e-917a-8329baa01333" />
+
+
+
+
 
 
 
