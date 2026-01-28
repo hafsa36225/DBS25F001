@@ -7,6 +7,15 @@ Hafsa
 Aiman 
 # Project 
 This project is based on Hospital Management System that manages patients, doctors, appointments, billing, and reports.
+# Core Modules
+Patient Management  
+Doctor Management  
+Appointment Scheduling  
+Department Management  
+Billing & Payments  
+Medical Records  
+User Authentication  
+Reports Generation 
 # Start 
 # Patient
 CREATE TABLE Patient (
