@@ -270,9 +270,45 @@ CREATE TABLE LoginLog (
     FOREIGN KEY (UserID) REFERENCES User(UserID)
 );
 <img width="567" height="195" alt="image" src="https://github.com/user-attachments/assets/41a33b2a-968f-4e9a-8b62-5de263a4fe59" />
-
 # ERD Daigram 
-![ERD 2](https://github.com/user-attachments/assets/37289ba8-3458-4703-8795-3ecefed060ec)
+![ERD 2](https://github.com/user-attachments/assets/5a0abaa1-d77c-4680-bb00-e92780966d1d)
+# Key Relationships Explaination:
+#  Core Medical Entities
+· Patient ↔ MedicalRecord (1:N) - One patient can have multiple medical records
+· Patient ↔ Appointment (1:N) - One patient can have multiple appointments
+· Doctor ↔ Appointment (1:N) - One doctor can have multiple appointments
+· Doctor ↔ MedicalRecord (1:N) - One doctor can create multiple medical records
+#   Prescription System
+ MedicalRecord → Prescription (1:1) - Each medical record has one prescription
+· Prescription → PrescriptionItem (1:N) - One prescription contains multiple medicines
+· Medicine → PrescriptionItem (1:N) - One medicine can appear in multiple prescriptions
+# Department & Specialty:
+· Department → Doctor (1:N) - One department can have multiple doctors
+· Specialty → Doctor (1:N) - One specialty can have multiple doctors
+# Billing & Payment System:
+· Patient → Billing (1:N) - One patient can have multiple bills
+· Billing → BillItem (1:N) - One bill contains multiple items
+· Billing → Payment (1:1) - Each bill has one payment record
+# Admission & Room Management:
+· Patient → Admission (1:N) - One patient can have multiple admissions
+· Room → Admission (1:N) - One room can have multiple admissions over time
+· Admission is linked to Billing through PatientID
+# User Management:
+· Role → User (1:N) - One role can be assigned to multiple users
+# Cardinality Notations:
+· 1:1 - One-to-One relationship
+· 1:N - One-to-Many relationship
+· N:1 - Many-to-One relationship
+· (PK) - Primary Key
+· (FK) - Foreign Key
+# Important Constraints:
+1. Patient and Doctor have unique CNIC constraints
+2. Department and Specialty names are unique
+3. PrescriptionItem has a composite primary key (PrescriptionID + MedicineID)
+4. Status fields use ENUM types for data validation
+5. All foreign key relationships maintain referential integrity
+# This ERD represents a normalized database design suitable for a hospital management system with proper relationships between entities
+
 
 
 
