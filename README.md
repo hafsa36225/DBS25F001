@@ -308,7 +308,87 @@ CREATE TABLE LoginLog (
 4. Status fields use ENUM types for data validation
 5. All foreign key relationships maintain referential integrity
 # This ERD represents a normalized database design suitable for a hospital management system with proper relationships between entities
-
+# Views 
+# Patient
+Select*from Patient;
+CREATE VIEW View_PatientDetails AS
+SELECT p.PatientID, p.Name, p.Gender, pc.Phone, pc.Address
+FROM Patient p
+JOIN PatientContact pc ON p.PatientID = pc.PatientID;
+# Doctor Department 
+CREATE VIEW View_DoctorDepartment AS
+SELECT d.Name AS DoctorName, dep.DepartmentName, s.SpecialtyName
+FROM Doctor d
+JOIN Department dep ON d.DepartmentID = dep.DepartmentID
+JOIN Specialty s ON d.SpecialtyID = s.SpecialtyID;
+# Appointment 
+CREATE VIEW View_Appointments AS
+SELECT a.AppointmentID, p.Name AS Patient, d.Name AS Doctor, a.AppointmentDate, a.Status
+FROM Appointment a
+JOIN Patient p ON a.PatientID = p.PatientID
+JOIN Doctor d ON a.DoctorID = d.DoctorID;
+# View Billing Detail
+CREATE VIEW View_BillingDetails AS
+SELECT b.BillID, p.Name, bi.Description, bi.Amount
+FROM Billing b
+JOIN Patient p ON b.PatientID = p.PatientID
+JOIN BillItem bi ON b.BillID = bi.BillID;
+DELIMITER 
+# Procedure   
+CREATE PROCEDURE AddPatient(
+ IN pname VARCHAR(50),
+ IN pcnic VARCHAR(15),
+ IN pgender VARCHAR(10),
+ IN pdob DATE
+)
+BEGIN
+ INSERT INTO Patient(Name, CNIC, Gender, DOB)
+ VALUES(pname, pcnic, pgender, pdob);
+END //
+DELIMITER 
+# Trigger 
+# After Payment
+CREATE TRIGGER AfterPayment
+AFTER INSERT ON Payment
+FOR EACH ROW
+BEGIN
+ UPDATE Billing SET BillDate = CURDATE()
+ WHERE BillID = NEW.BillID;
+END;
+# Check Discharge
+CREATE TRIGGER CheckDischarge
+BEFORE UPDATE ON Admission
+FOR EACH ROW
+BEGIN
+ IF NEW.DischargeDate < NEW.AdmitDate THEN
+ SIGNAL SQLSTATE '45000'
+ SET MESSAGE_TEXT = 'Discharge date cannot be before admit date';
+ END IF;
+END;
+# Transaction
+START TRANSACTION;
+INSERT INTO Admission(PatientID, RoomID, AdmitDate)
+VALUES(2,1,CURDATE());
+UPDATE Room SET DailyCharges = DailyCharges WHERE RoomID=1;
+COMMIT;
+START TRANSACTION;
+INSERT INTO Billing(PatientID, BillDate) VALUES(2,CURDATE());
+INSERT INTO Payment(BillID,Amount,PaymentMethod,PaymentStatus)
+VALUES(4,3000,'Cash','Paid');
+COMMIT;
+START TRANSACTION;
+INSERT INTO Appointment(PatientID,DoctorID,AppointmentDate)
+VALUES(1,2,CURDATE());
+INSERT INTO MedicalRecord(PatientID,DoctorID,Diagnosis,RecordDate)
+VALUES(1,2,'Checkup',CURDATE());
+COMMIT;
+CREATE TABLE ErrorLog (
+ LogID INT AUTO_INCREMENT PRIMARY KEY,
+ ErrorMessage VARCHAR(255),
+ LogDate DATETIME
+);
+INSERT INTO ErrorLog(ErrorMessage, LogDate)
+VALUES('Invalid discharge date', NOW());
 
 
 
