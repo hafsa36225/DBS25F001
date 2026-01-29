@@ -271,6 +271,10 @@ CREATE TABLE LoginLog (
 );
 <img width="567" height="195" alt="image" src="https://github.com/user-attachments/assets/41a33b2a-968f-4e9a-8b62-5de263a4fe59" />
 
+# ERD Daigram 
+![ERD 2](https://github.com/user-attachments/assets/37289ba8-3458-4703-8795-3ecefed060ec)
+
+
 
 
 
